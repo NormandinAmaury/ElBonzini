@@ -14,22 +14,35 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+import {Button} from 'react-native-elements'
+
 import Style from '../../../src/assets/styles/styles';
 
 
 const OpenIntroScene = function (props) {
   return (
     <View style={Style.introContainer}>
-      <TouchableHighlight
-        style={Style.loginButton}
-        onPress={props.gotoLogin}>
-        <Text style={Style.loginText}>LOG IN </Text>
-      </TouchableHighlight>
-      <TouchableHighlight
-        style={Style.signUpButton}
-        onPress={props.gotoSignUp}>
-        <Text style={Style.signUpText}>SIGN UP</Text>
-      </TouchableHighlight>
+      <Button
+        large
+        icon={{name: 'unlock', type: 'evilicon', color:'#007F83'}}
+        title='LOG IN'
+        color='#007F83'
+        backgroundColor='white'
+        borderRadius={10}
+        buttonStyle={{width:250}}
+        onPress={props.gotoLogin}
+      />
+      <Text></Text>
+      <Button
+        large
+        icon={{name: 'pencil', type: 'evilicon', color:'#007F83'}}
+        title='SIGN UP'
+        color='#007F83'
+        backgroundColor='white'
+        borderRadius={10}
+        buttonStyle={{width:250}}
+        onPress={props.gotoSignUp}
+      />
     </View>
   );
 };

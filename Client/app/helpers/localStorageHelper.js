@@ -87,8 +87,13 @@ const LocalStorage = {
       this.removeUser();
       resolve();
     });
-
   },
+
+  saveBabyFoot(babyFootData) {
+    AsyncStorage.setItem('babyFoot', JSON.stringify(babyFootData))
+      .then(console.log('babyFoot saved successfully'))
+      .catch(err => console.log('babyFoot saving error: ' + err.message));
+  }
 };
 
 export default LocalStorage;

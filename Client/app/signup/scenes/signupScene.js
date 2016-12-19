@@ -16,90 +16,58 @@ import {
   ScrollView,
 } from 'react-native';
 
-import TextField from '../../../node_modules/react-native-md-textinput';
 import ErrorMessage from '../../components/errorMessage';
 import Style from '../../../src/assets/styles/styles';
+import { FormLabel, FormInput, Button } from 'react-native-elements'
 
 const SignUpScene = function(props) {
   return (
-    <View style={Style.loginContainer}>
       <ScrollView style={Style.scrollViewSignup}>
-        <TextField
-          label="First Name"
-          highlightColor={props.borderColorFirstName}
-          //style={{height: 40, borderColor:props.borderColorFirstName, borderWidth: 1}}
-          //placeholder={I18n.t('name')}
-          onChangeText={props.updateFirstName}
-          value={props.firstName}
-          dense={true}
+        <FormLabel labelStyle={{color: '#007F83'}}>First Name</FormLabel>
+        <FormInput onChangeText={props.updateFirstName}
+                   value={props.firstName}
         />
-        <TextField
-          label="Last Name"
-          highlightColor={props.borderColorFirstName}
-          //style={{height: 40, borderColor:props.borderColorFirstName, borderWidth: 1}}
-          //placeholder={I18n.t('name')}
-          onChangeText={props.updateLastName}
-          value={props.lastName}
-          dense={true}
+        <FormLabel labelStyle={{color: '#007F83'}}>Last Name</FormLabel>
+        <FormInput onChangeText={props.updateLastName}
+                   value={props.lastName}
         />
-        <TextField
-          label="Username"
-          highlightColor={props.borderColorUsername}
-          //style={{height: 40, borderColor:props.borderColorFirstName, borderWidth: 1}}
-          //placeholder={I18n.t('name')}
-          onChangeText={props.updateUsername}
-          value={props.username}
-          dense={true}
+        <FormLabel labelStyle={{color: '#007F83'}}>Username</FormLabel>
+        <FormInput onChangeText={props.updateUsername}
+                   value={props.username}
         />
-        <TextField
-          label="French Department"
-          highlightColor={props.borderColorFrenchDepartment}
-          //style={{height: 40, borderColor:props.borderColorFirstName, borderWidth: 1}}
-          //placeholder={I18n.t('name')}
-          onChangeText={props.updateFrenchDepartment}
-          value={props.frenchDepartment}
-          dense={true}
+        <FormLabel labelStyle={{color: '#007F83'}}>French Department</FormLabel>
+        <FormInput onChangeText={props.updateFrenchDepartment}
+                   value={props.frenchDepartment}
+                   keyboardType='numeric'
         />
-        <TextField
-          //style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          //placeholder={I18n.t('email')}
-          highlightColor={props.borderColorEmail}
-          label="Email address"
-          keyboardType='email-address'
-          onChangeText={props.updateEmail}
-          value={props.emailAddress}
-          dense={true}
+        <FormLabel labelStyle={{color: '#007F83'}}>Email Address</FormLabel>
+        <FormInput onChangeText={props.updateEmail}
+                   keyboardType='email-address'
+                   value={props.emailAddress}
         />
-        <TextField
-          //style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          //placeholder={I18n.t('password')}
-          highlightColor={props.borderColorPassword}
-          label="Password"
-          secureTextEntry={true}
-          maxLength={16}
-          onChangeText={props.updatePassword}
-          value={props.password}
-          dense={true}
+        <FormLabel labelStyle={{color: '#007F83'}}>Password</FormLabel>
+        <FormInput onChangeText={props.updatePassword}
+                   secureTextEntry={true}
+                   value={props.password}
         />
-        <TextField
-          //style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          //placeholder={I18n.t('confirmPassword')}
-          highlightColor={props.borderColorConfirmPassword}
-          label="Confirm password"
-          secureTextEntry={true}
-          maxLength={16}
-          onChangeText={props.checkPassword}
-          value={props.confirmPassword}
-          dense={true}
+        <FormLabel labelStyle={{color: '#007F83'}}>Confirm Password</FormLabel>
+        <FormInput onChangeText={props.checkPassword}
+                   secureTextEntry={true}
+                   value={props.confirmPassword}
         />
-        <TouchableHighlight
-          style={Style.loginButton}
-          onPress={props.register}>
-          <Text style={Style.loginText}>CONFIRM</Text>
-        </TouchableHighlight>
+        <Text></Text>
+        <Button
+          small
+          icon={{name: 'check', type: 'evilicon', color:'white'}}
+          title='CONFIRM'
+          color='white'
+          backgroundColor='#007F83'
+          borderRadius={10}
+          buttonStyle={{width:250, textAlign:'center'}}
+          onPress={props.register}
+        />
         <ErrorMessage errorMessage={props.errorMessage} error={props.error} />
       </ScrollView>
-    </View>
   );
 };
 

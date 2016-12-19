@@ -66,6 +66,47 @@ const Api = {
     })
   },
 
+  addBabyFoot(babyFoot) {
+    return new Promise((resolve, reject) => {
+      return fetch(Constant.apiUrl + '/babyfoot/new', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': authToken,
+        },
+        body: JSON.stringify(babyFoot)
+      })
+        .then(response => response.json())
+        .then(responseJson => resolve(responseJson))
+        .catch(err => {
+          throw {
+            message: 'Error in baby foot creation',
+            error: err
+          };
+        });
+    })
+  },
+
+  getAllBabyfoot() {
+    return new Promise((resolve, reject) => {
+      return fetch(Constant.apiUrl + '/babyfoot/allBabyFoot', {
+        method: 'GET',
+        headers: {
+          'Authorization': authToken,
+        }
+      })
+        .then(response => response.json())
+        .then(responseJson => resolve(responseJson))
+        .catch(err => {
+          throw {
+            message: 'Error getting baby foot',
+            error: err
+          };
+        });
+    })
+  },
+
 };
 
 export default Api;

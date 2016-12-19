@@ -16,37 +16,36 @@ import {
 } from 'react-native';
 
 import Style from '../../../src/assets/styles/styles';
-import TextField from '../../../node_modules/react-native-md-textinput';
 import ErrorMessage from '../../components/errorMessage';
+import { FormLabel, FormInput, Button } from 'react-native-elements'
+
 
 const LoginScene = function (props) {
   return (
-    <View style={Style.loginContainer}>
       <ScrollView style={Style.scrollViewLogin}>
-        <TextField
-          highlightColor={props.borderColorEmail}
-          label="Email Address"
-          keyboardType='email-address'
-          onChangeText={props.updateEmail }
-          value={props.emailAddress}
-          dense={true}
+        <FormLabel labelStyle={{color: '#007F83'}}>Email Address</FormLabel>
+        <FormInput onChangeText={props.updateEmail}
+                   value={props.emailAddress}
+                   keyboardType='email-address'
         />
-        <TextField
-          highlightColor={props.borderColorPassword}
-          label="Password"
-          onChangeText={props.updatePassword }
-          maxLength={16}
-          dense={true}
-          value={props.password}
-          secureTextEntry={true}/>
-        <TouchableHighlight
-          style={Style.loginButton}
-          onPress={props.login}>
-          <Text style={Style.loginText}>LOG IN</Text>
-        </TouchableHighlight>
+        <FormLabel labelStyle={{color: '#007F83'}}>Password</FormLabel>
+        <FormInput onChangeText={props.updatePassword}
+                   value={props.password}
+                   secureTextEntry={true}
+        />
+        <Text></Text>
+        <Button
+          small
+          icon={{name: 'check', type: 'evilicon', color:'white'}}
+          title='LOG IN'
+          color='white'
+          backgroundColor='#007F83'
+          borderRadius={10}
+          buttonStyle={{width:250, textAlign:'center'}}
+          onPress={props.login}
+        />
         <ErrorMessage errorMessage={props.errorMessage} error={props.error}/>
       </ScrollView>
-    </View>
   );
 };
 export default LoginScene;

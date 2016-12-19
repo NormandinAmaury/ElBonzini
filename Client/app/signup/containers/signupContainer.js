@@ -121,7 +121,7 @@ export default class SignUpScene1Container extends Component {
   }
 
   updateFrenchDepartment(frenchDepartment) {
-    this.setState({state: frenchDepartment});
+    this.setState({frenchDepartment: frenchDepartment});
     if (frenchDepartment.length > 2 && frenchDepartment !== '') {
       this.setState({borderColorState: '#1f8e6f'});
       if (this.checkInput()) {

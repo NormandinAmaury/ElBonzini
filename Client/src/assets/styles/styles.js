@@ -29,66 +29,25 @@ var Style = StyleSheet.create({
       fontSize: 16
     },
     introContainer: {
+      backgroundColor: mainColor,
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center'
-    },
-    loginText: {
-      textAlign: 'center',
-      color: 'white',
-      fontSize: 25,
-    },
-    loginButton: {
-      width: 200,
-      marginRight: 40,
-      marginLeft: 40,
-      marginTop: 10,
-      paddingTop: 5,
-      paddingBottom: 5,
-      borderRadius: 10,
-      borderWidth: 1,
-      borderColor: mainColor,
-      backgroundColor: mainColor,
-    },
-    signUpButton: {
-      width: 200,
-      marginRight: 40,
-      marginLeft: 40,
-      marginTop: 10,
-      paddingTop: 5,
-      paddingBottom: 5,
-      borderRadius: 10,
-      borderWidth: 1,
-      borderColor: 'black',
-      backgroundColor: 'white',
-    },
-    signUpText: {
-      textAlign: 'center',
-      color: 'black',
-      fontSize: 15
     },
     loginContainer: {
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center'
     },
-    inputLogin: {
-      textAlign: 'center',
-      height: 40,
-    },
     scrollViewSignup: {
-      flex: 1,
       backgroundColor: '#FFFFFF',
-      paddingTop: 100,
-      marginLeft: 16,
-      marginRight: 16
+      flex: 1,
+      paddingTop: 30,
     },
     scrollViewLogin: {
       flex: 0.5,
       backgroundColor: '#FFFFFF',
-      paddingTop: 100,
-      marginLeft: 16,
-      marginRight: 16
+      paddingTop: 30,
     },
   }
 );
