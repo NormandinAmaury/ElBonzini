@@ -3,6 +3,7 @@
  */
 const express = require('express');
 const Promise = require('bluebird');
+const passport = require('passport');
 const jwt = require('jwt-simple');
 
 const User = require('../../models/user');
@@ -10,7 +11,7 @@ const config = require('../../../config/config');
 
 const generalMethods = {
   findOneByEmail(emailAddress) {
-    return User.findOne({emailAddress: emailAddress}).exec();
+    return User.findOne({emailAddress}).exec();
   },
   saveClient(user) {
     return new Promise((resolve, reject) => {
@@ -22,6 +23,7 @@ const generalMethods = {
         username: user.username,
         emailAddress: user.emailAddress,
         password: user.password,
+        frenchDepartment: user.frenchDepartment,
         creationDate: date.getTime()
       };
 
@@ -62,7 +64,6 @@ module.exports = function () {
 
 
   router.post('/login', (req, res) => {
-    console.log('user email ' + req.body.emailAddress);
     generalMethods.findOneByEmail(req.body.emailAddress)
       .then(user => {
         console.log(user);

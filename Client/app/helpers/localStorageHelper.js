@@ -27,7 +27,6 @@ const LocalStorage = {
     return new Promise((resolve, reject) => {
       return AsyncStorage.getItem(Constant.STORAGE_KEY)
         .then(token => {
-          console.log("got token" + token);
           if (token) {
             console.log("token ok");
             Api.setHeaderInfo(token);
@@ -81,10 +80,11 @@ const LocalStorage = {
     })
   },
 
-  wipeMempory() {
+  wipeMemory() {
     return new Promise((resolve, reject) => {
       this.removeToken();
       this.removeUser();
+      this.removeBabyFoot();
       resolve();
     });
   },
@@ -93,7 +93,13 @@ const LocalStorage = {
     AsyncStorage.setItem('babyFoot', JSON.stringify(babyFootData))
       .then(console.log('babyFoot saved successfully'))
       .catch(err => console.log('babyFoot saving error: ' + err.message));
-  }
+  },
+
+  removeBabyFoot() {
+    AsyncStorage.removeItem('babyFoot')
+      .then(console.log('babyfoot removed'))
+      .catch(err => console.log(console.log('error removing babyfoot ' + err.message)))
+  },
 };
 
 export default LocalStorage;

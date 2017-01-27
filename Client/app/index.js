@@ -18,6 +18,10 @@ import {
 } from 'react-native';
 
 import Route from './route';
+import { Provider } from 'react-redux';
+import configureStore from './store/configureStore';
+
+const store = configureStore();
 
 class Client extends Component {
 
@@ -27,8 +31,10 @@ class Client extends Component {
 
   render() {
     return (
+      <Provider store={store}>
       <Route
       />
+      </Provider>
     );
   }
 }

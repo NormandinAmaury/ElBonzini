@@ -16,8 +16,11 @@
     "body-parser": "^1.15.2",
     "cors": "^2.8.1",
     "express": "^4.14.0",
+    "fs": "0.0.1-security",
     "jwt-simple": "^0.5.1",
+    "lwip": "0.0.9",
     "mongoose": "^4.7.2",
+    "node-base64-image": "^1.0.3",
     "passport": "^0.3.2",
     "passport-jwt": "^2.2.1"
   }

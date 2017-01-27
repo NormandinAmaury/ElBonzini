@@ -15,9 +15,9 @@ import {
 } from 'react-native';
 
 import Style from '../src/assets/styles/styles';
-import NavigationBar from './components/navigationBar';
-import SplashScene  from './splash/splashScene';
-import OpenIntroContainer from './openInto/containers/openIntroContainer';
+import NavigationBar from './components/componentsHelper/navigationBar';
+import SplashScene  from './components/splash/splashScene';
+import OpenIntroContainer from './components/openInto/containers/openIntroContainer';
 
 export default class Route extends Component {
 

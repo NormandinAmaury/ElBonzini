@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const babyFootSchema = new mongoose.Schema({
   userId: String,
   name: String,
+  picture: String,
   creationDate: Number,
 });
 
