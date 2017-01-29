@@ -69,7 +69,7 @@ const methods = {
     return BabyFoot.find({userId}).exec();
   },
   getOneBabyFoot(id) {
-    return BabyFoot.find({_id: id}).exec();
+    return BabyFoot.findOne({_id: id}).exec();
   },
   findOneUserById(id) {
     return User.findOne({_id: id}).exec();
@@ -115,7 +115,8 @@ const methods = {
     })
   },
 
-  getRandomPicture(number) {
+  updateBabyFoot(id, babyFoot) {
+    return BabyFoot.update({_id: id}, babyFoot).exec();
   }
 };
 
@@ -145,10 +146,19 @@ module.exports = function () {
   router.delete('/:id', passport.authenticate('jwt', {session: false}),
    (req, res) => {
      methods.deleteBabyFoot(req.params.id)
-      .then((docs) => res.json(
-       {success: true, msg: 'Successfully deleted beby foot', docs}))
+      .then(response => res.json(
+       {success: true, msg: 'Successfully deleted baby foot', data: response}))
       .catch(err => res.json(
        {success: false, msg: 'Error deleted baby foot', err}));
+   });
+
+  router.patch('/:id', passport.authenticate('jwt', {session: false}),
+   (req, res) => {
+     methods.updateBabyFoot(req.params.id, req.body)
+      .then(response => res.json(
+       {success: true, msg: 'Successfully updated baby foot', data: response}))
+      .catch(err => res.json(
+       {success: false, msg: 'Error updated baby foot', err}));
    });
 
   router.get('/allBabyFoot', passport.authenticate('jwt', {session: false}),

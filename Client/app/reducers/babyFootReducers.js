@@ -25,6 +25,15 @@ export default (state = [], action) => {
     //   return Object.assign({}, state, {
     //     babyFootArray: undefined,
     //   });
+    case 'DELETE_BABYFOOT_SUCCESSFULLY':
+      return [
+       ...state.slice(0,action.index),
+       ...state.slice(action.index + 1)
+      ];
+    case 'EDIT_BABYFOOT_SUCCESSFULLY':
+      return [
+        ...action.babyFoot
+      ];
     default:
       return state;
   }

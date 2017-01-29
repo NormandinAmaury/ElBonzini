@@ -8,6 +8,7 @@ import {
   AppRegistry,
   View,
   Navigator,
+  Alert
 } from 'react-native';
 
 import BabyFootListScene from '../scenes/babyFootListScene';
@@ -19,6 +20,8 @@ class HomeContainer extends Component {
     super(props);
     this.state = {
       modalVisible: false,
+      editModalVisible: false,
+      babyFootEdited: {}
     };
   }
 
@@ -28,10 +31,28 @@ class HomeContainer extends Component {
      <BabyFootListScene
       babyFoot={this.props.babyFootObj}
       modalVisible={this.state.modalVisible}
+      editModalVisible={this.state.editModalVisible}
       onCloseModal={this.onCloseModal.bind(this)}
       onOpenModal={this.onOpenModal.bind(this)}
+      onCloseEditModal={this.onCloseEditModal.bind(this)}
+      onOpenEditModal={this.onOpenEditModal.bind(this)}
+      alertDelete={this.alertDelete.bind(this)}
+      babyFootEdited={this.state.babyFootEdited}
      />
     );
+  }
+
+  alertDelete(babyFoot, index) {
+    Alert.alert('Delete a foosball', 'Are you sure ?',
+     [
+       {text: 'Cancel', onPress: () => console.log('Cancel Pressed!')},
+       {text: 'Delete', onPress: () => this.deleteBabyFoot(babyFoot._id, index)},
+     ]
+    )
+  }
+
+  deleteBabyFoot(babyFootId, index) {
+    this.props.deleteBabyFoot(babyFootId, index);
   }
 
   setModalVisible(visible) {
@@ -45,6 +66,19 @@ class HomeContainer extends Component {
   onOpenModal() {
     this.setModalVisible(true);
   }
+
+  setEditModalVisible(visible) {
+    this.setState({editModalVisible: visible});
+  }
+
+  onCloseEditModal() {
+    this.setEditModalVisible(!this.state.editModalVisible);
+  }
+
+  onOpenEditModal(bf) {
+    this.setState({babyFootEdited: bf});
+    this.setEditModalVisible(true);
+  }
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -56,7 +90,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getAllBabyFoot: () => dispatch(babyFootActions.getAllBabyFoot())
+    getAllBabyFoot: () => dispatch(babyFootActions.getAllBabyFoot()),
+    deleteBabyFoot: (id, index) => dispatch(babyFootActions.deleteBabyFoot(id, index))
   }
 };
 

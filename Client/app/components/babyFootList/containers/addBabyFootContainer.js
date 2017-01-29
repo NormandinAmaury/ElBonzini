@@ -64,7 +64,6 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     createBabyFoot: (babyFoot) => dispatch(babyFootActions.createBabyFoot(babyFoot)),
-    getAllBabyFoot: () => dispatch(babyFootActions.getAllBabyFoot())
   }
 };
 
