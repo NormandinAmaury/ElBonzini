@@ -21,10 +21,6 @@ export default (state = [], action) => {
     //   return Object.assign({}, state, {
     //     error: action.error
     //   });
-    // case 'REMOVE_BABYFOOT':
-    //   return Object.assign({}, state, {
-    //     babyFootArray: undefined,
-    //   });
     case 'DELETE_BABYFOOT_SUCCESSFULLY':
       return [
        ...state.slice(0,action.index),

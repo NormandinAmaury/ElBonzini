@@ -12,7 +12,7 @@ export default (state = {}, action) => {
   console.log(action.type);
   switch (action.type) {
     case 'IS_LOGIN': {
-      return token !== '';
+      return token !== '' ;
     }
     default:
       return state;

@@ -13,8 +13,9 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-import Style from '../../../../src/assets/styles/styles';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { Button } from 'react-native-elements'
+
 
 const ProfileScene = function (props) {
   return (
@@ -30,6 +31,16 @@ const ProfileScene = function (props) {
      <Text>{props.user.firstName} {props.user.lastName} Profile </Text>
      <Text>Username : {props.user.username}</Text>
      <Text>French Department : {props.user.frenchDepartment}</Text>
+     <Button
+      small
+      icon={{name: 'close', type: 'evilicon', color:'white'}}
+      title='DELETE MY ACCOUNT'
+      color='white'
+      backgroundColor='#CF2720'
+      borderRadius={10}
+      buttonStyle={{width:250, justifyContent:'center'}}
+      onPress={props.deleteUser}
+     />
    </ScrollView>
   );
 };

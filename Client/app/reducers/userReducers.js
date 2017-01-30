@@ -61,6 +61,16 @@ export default (state = initialState, action) => {
         token: undefined,
         user: undefined
       });
+    case 'DELETE_USER_SUCCESSFULLY':
+      LocalStorage.removeToken();
+      return Object.assign({}, state, {
+        token: undefined,
+        user: undefined
+      });
+    case 'DELETE_USER_FAILED':
+      return Object.assign({}, state, {
+        error: action.error
+      });
     default:
       return state;
   }

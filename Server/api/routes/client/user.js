@@ -16,6 +16,9 @@ const generalMethods = {
   updateUser(id, user) {
     return User.update({_id: id}, user).exec();
   },
+  deleteUser(id) {
+    return User.remove({_id: id}).exec();
+  },
 };
 
 module.exports = function () {
@@ -31,6 +34,16 @@ module.exports = function () {
       })
       .catch(err => res.json(
        {success: false, msg: 'Error get user', data: err}))
+   });
+
+  router.delete('/', passport.authenticate('jwt', {session: false}),
+   (req, res) => {
+     const userId = req.header.userId;
+     generalMethods.deleteUser(userId)
+      .then(response => res.json(
+       {success: true, msg: 'Successfully deleted user', data: response}))
+      .catch(err => res.json(
+       {success: false, msg: 'Error deleted user', err}));
    });
 
   return router;

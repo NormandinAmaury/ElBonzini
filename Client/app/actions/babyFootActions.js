@@ -37,12 +37,6 @@ export const getAllBabyFootErrorOptimistic = error => {
   }
 };
 
-export const removeBabyFoot = () => {
-  return {
-    type: 'REMOVE_BABYFOOT',
-  }
-};
-
 export const deleteBabyFootOptimistic = index => {
   return {
     type: 'DELETE_BABYFOOT_SUCCESSFULLY',
@@ -94,6 +88,9 @@ export function createBabyFoot(babyFoot) {
 }
 
 export function getAllBabyFoot() {
+  getTk()
+   .then(response => token = response)
+   .catch(err => console.log(err));
   return function (dispatch) {
     return fetch(Constant.apiUrl + '/babyfoot', {
       method: 'GET',

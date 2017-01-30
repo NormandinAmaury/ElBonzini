@@ -9,35 +9,36 @@ getTk()
  .then(response => token = response)
  .catch(err => console.log(err));
 
-export const createUserOptimistic = (user) => {
+export const createUserOptimistic = user => {
   return {
     type: 'CREATE_USER_SUCCESSFULLY',
     user
   }
 };
 
-export const createUserErrorOptimistic = (error) => {
+export const createUserErrorOptimistic = error => {
   return {
     type: 'CREATE_USER_FAILED',
     error
   }
 };
 
-export const loginSuccessOptimistic = (user) => {
+export const loginSuccessOptimistic = user => {
   return {
     type: 'LOGGED_SUCCESSFULLY',
     user
   }
 };
 
-export const loginErrorOptimistic = (error) => {
+export const loginErrorOptimistic = error => {
   return {
     type: 'LOGGED_FAILED',
     error
   }
 };
 
-export const addToken = (token) => {
+export const addToken = tk => {
+  token = tk;
   return {
     type: 'ADD_TOKEN',
     token
@@ -50,16 +51,29 @@ export const logout = () => {
   }
 };
 
-export const getUserOptimistic = (user) => {
+export const getUserOptimistic = user => {
   return {
     type: 'GET_USER_SUCCESSFULLY',
     user
   }
 };
 
-export const getUserErrorOptimistic = (error) => {
+export const getUserErrorOptimistic = error => {
   return {
     type: 'GET_USER_FAILED',
+    error
+  }
+};
+
+export const deleteUserOptimistic = () => {
+  return {
+    type: 'DELETE_USER_SUCCESSFULLY',
+  }
+};
+
+export const deleteUserErrorOptimistic = error => {
+  return {
+    type: 'DELETE_USER_FAILED',
     error
   }
 };
@@ -100,9 +114,6 @@ export function login(user) {
       .then(responseJson => {
         dispatch(loginSuccessOptimistic(responseJson.userData));
         dispatch(addToken(responseJson.token));
-        getTk()
-         .then(response => token = response)
-         .catch(err => console.log(err));
         return Promise.resolve();
       })
       .catch(err => {
@@ -129,4 +140,28 @@ export function getUser() {
       dispatch(getUserErrorOptimistic(err));
     });
 }
+
+export function deleteUser() {
+  return function (dispatch) {
+    return fetch(Constant.apiUrl + '/user', {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': token
+      },
+    })
+     .then(response => response.json())
+     .then((response) => {
+       if (response.data.ok === 1) {
+         dispatch(deleteUserOptimistic());
+       }
+       return Promise.resolve();
+     })
+     .catch(err => {
+       dispatch(deleteUserErrorOptimistic(err));
+     });
+  }
+}
+
 

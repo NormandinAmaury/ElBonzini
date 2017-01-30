@@ -14,7 +14,6 @@ import OpenIntroContainer from '../../openInto/containers/openIntroContainer';
 import ProfileScene from '../scenes/profileScene';
 import {connect} from 'react-redux';
 import * as userActions from '../../../actions/userActions';
-import * as babyFootActions from '../../../actions/babyFootActions';
 
 class ProfileContainer extends Component {
   constructor(props) {
@@ -32,12 +31,23 @@ class ProfileContainer extends Component {
      <ProfileScene
       user={this.props.userObj.user}
       logout={this.logout.bind(this)}
+      deleteUser={this.deleteUser.bind(this)}
      />
     );
   }
 
   logout() {
     this.props.logout();
+    this.props.navigator.replace({
+      title: 'OpenIntroContainer',
+      component: OpenIntroContainer,
+      navigationBarHidden: true,
+      display: false
+    })
+  }
+
+  deleteUser() {
+    this.props.deleteUser();
     this.props.navigator.replace({
       title: 'OpenIntroContainer',
       component: OpenIntroContainer,
@@ -57,7 +67,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     logout: () => dispatch(userActions.logout()),
     getUser: () => dispatch(userActions.getUser()),
-    // removeBabyFoot: () => dispatch(babyFootActions.removeBabyFoot())
+    deleteUser: () => dispatch(userActions.deleteUser()),
   }
 };
 
