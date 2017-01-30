@@ -152,7 +152,6 @@ class SignUpSceneContainer extends Component {
 
   register() {
     if (!this.state.error && !this.state.errorDepartment) {
-      console.log("1");
       const user = {
         firstName: this.state.firstName,
         lastName: this.state.lastName,
@@ -163,21 +162,28 @@ class SignUpSceneContainer extends Component {
       };
       this.props.createUser(user)
        .then(() => {
-         this.props.login(user)
-          .then(() => {
-            this.props.navigator.push({
-              title: 'Home',
-              component: HomeContainer,
-              navigationBarHidden: true,
-              display: false
-            });
-          })
-          .catch(err => {
-            this.setState({
-              error: true,
-              errorMessage: err
-            });
+        if(this.props.userObj.error === null) {
+          this.props.login(user)
+           .then(() => {
+             this.props.navigator.push({
+               title: 'Home',
+               component: HomeContainer,
+               navigationBarHidden: true,
+               display: false
+             });
+           })
+           .catch(err => {
+             this.setState({
+               error: true,
+               errorMessage: err
+             });
+           });
+        } else {
+          this.setState({
+            error: true,
+            errorMessage: this.props.userObj.error
           });
+        }
        })
        .catch(err => {
          this.setState({
@@ -186,13 +192,11 @@ class SignUpSceneContainer extends Component {
          });
        });
     } else if (this.state.errorDepartment) {
-      console.log("2");
       this.setState({
         errorDepartment: true,
         errorMessageDepartment: 'Please to enter a valid french department'
       })
     } else {
-      console.log("3");
       this.setState({
         error: true,
         errorMessage: 'Please to fill in properly the fields'
@@ -204,7 +208,7 @@ class SignUpSceneContainer extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    initialState: state.initialState
+    userObj: state.userObj,
   }
 };
 

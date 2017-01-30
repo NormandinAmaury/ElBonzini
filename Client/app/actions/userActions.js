@@ -90,12 +90,16 @@ export function createUser(user) {
     })
       .then(response => response.json())
       .then(responseJson => {
-        dispatch(createUserOptimistic(responseJson));
-        login(responseJson.userData);
-        return Promise.resolve();
+        if (responseJson.success) {
+          dispatch(createUserOptimistic(responseJson));
+          login(responseJson.userData);
+          return Promise.resolve();
+        } else {
+          return Promise.reject(responseJson);
+        }
       })
-      .catch(err => {
-        dispatch(createUserErrorOptimistic(err));
+      .catch(responseJson => {
+        dispatch(createUserErrorOptimistic(responseJson.msg));
       });
   }
 }
@@ -112,12 +116,16 @@ export function login(user) {
     })
       .then(response => response.json())
       .then(responseJson => {
-        dispatch(loginSuccessOptimistic(responseJson.userData));
-        dispatch(addToken(responseJson.token));
-        return Promise.resolve();
+        if (responseJson.success) {
+          dispatch(loginSuccessOptimistic(responseJson.userData));
+          dispatch(addToken(responseJson.token));
+          return Promise.resolve();
+        } else {
+          return Promise.reject(responseJson);
+        }
       })
-      .catch(err => {
-        dispatch(loginErrorOptimistic(err));
+      .catch((responseJson) => {
+        dispatch(loginErrorOptimistic(responseJson.msg));
       });
 }
 

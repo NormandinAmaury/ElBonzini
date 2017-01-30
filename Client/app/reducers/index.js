@@ -4,10 +4,10 @@
 import { combineReducers } from 'redux';
 import userObj from './userReducers';
 import auth from './authReducers';
-import babyFootObj from './babyFootReducers';
+import foosballObj from './foosballReducers';
 
 export default combineReducers({
   userObj: userObj,
   auth: auth,
-  babyFootObj: babyFootObj
+  foosballObj: foosballObj
 });

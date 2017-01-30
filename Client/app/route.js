@@ -18,6 +18,7 @@ import Style from '../src/assets/styles/styles';
 import NavigationBar from './components/componentsHelper/navigationBar';
 import SplashScene  from './components/splash/splashScene';
 import OpenIntroContainer from './components/openInto/containers/openIntroContainer';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class Route extends Component {
 
@@ -63,7 +64,6 @@ export default class Route extends Component {
 };
 
 var NavigationBarRouteMapper = {
-  // TODO beau chevron
   LeftButton(route, navigator, index, navState) {
     console.log(route.title);
     if (route.title === 'OpenIntroContainer') {
@@ -71,7 +71,7 @@ var NavigationBarRouteMapper = {
     } else {
       return (
         <TouchableHighlight onPress={() => navigator.pop()}>
-          <Icon name="md-arrow-back" size={20}/>
+          <Icon name="ios-arrow-back" size={30} color='white'/>
         </TouchableHighlight>
       );
     }

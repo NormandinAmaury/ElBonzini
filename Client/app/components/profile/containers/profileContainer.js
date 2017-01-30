@@ -8,6 +8,7 @@ import {
   AppRegistry,
   View,
   Navigator,
+  Alert
 } from 'react-native';
 
 import OpenIntroContainer from '../../openInto/containers/openIntroContainer';
@@ -31,7 +32,7 @@ class ProfileContainer extends Component {
      <ProfileScene
       user={this.props.userObj.user}
       logout={this.logout.bind(this)}
-      deleteUser={this.deleteUser.bind(this)}
+      alertDelete={this.alertDelete.bind(this)}
      />
     );
   }
@@ -44,6 +45,15 @@ class ProfileContainer extends Component {
       navigationBarHidden: true,
       display: false
     })
+  }
+
+  alertDelete() {
+    Alert.alert('Delete your account', 'Are you sure ?',
+     [
+       {text: 'Cancel', onPress: () => console.log('Cancel Pressed!')},
+       {text: 'Delete', onPress: () => this.deleteUser()},
+     ]
+    )
   }
 
   deleteUser() {

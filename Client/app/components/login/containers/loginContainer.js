@@ -12,7 +12,7 @@ import {
 
 import LoginScene from '../scenes/loginScene';
 import HomeContainer from '../../home/homeContainer';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import * as userActions from '../../../actions/userActions';
 
 class LoginContainer extends Component {
@@ -28,15 +28,15 @@ class LoginContainer extends Component {
 
   render() {
     return (
-      <LoginScene
-        emailAddress={this.state.emailAddress}
-        password={this.state.password}
-        updateEmail={this.updateEmail.bind(this)}
-        updatePassword={this.updatePassword.bind(this)}
-        login={this.login.bind(this)}
-        error={this.state.error}
-        errorMessage={this.state.errorMessage}
-      />
+     <LoginScene
+      emailAddress={this.state.emailAddress}
+      password={this.state.password}
+      updateEmail={this.updateEmail.bind(this)}
+      updatePassword={this.updatePassword.bind(this)}
+      login={this.login.bind(this)}
+      error={this.state.error}
+      errorMessage={this.state.errorMessage}
+     />
     );
   }
 
@@ -70,23 +70,30 @@ class LoginContainer extends Component {
         password: this.state.password,
       };
       this.props.login(user)
-        .then(() => {
-          this.props.navigator.push({
-            title: 'Home',
-            component: HomeContainer,
-            navigationBarHidden: true,
-            display: false
-          });
-        })
-        .catch(err => {
-          this.setState({
-            error: true,
-            errorMessage: err
-          });
-        });
+       .then(() => {
+         if (this.props.userObj.error === null) {
+           this.props.navigator.push({
+             title: 'Home',
+             component: HomeContainer,
+             navigationBarHidden: true,
+             display: false
+           });
+         } else {
+           this.setState({
+             error: true,
+             errorMessage: this.props.userObj.error
+           });
+         }
+       })
+       .catch(err => {
+         this.setState({
+           error: true,
+           errorMessage: err
+         });
+       });
     } else {
       this.setState({
-        errorMessage: 'Please fill in the fields'
+        errorMessage: 'Please to fill in properly the fields'
       });
     }
   }
@@ -94,7 +101,7 @@ class LoginContainer extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    initialState: state.initialState
+    userObj: state.userObj,
   }
 };
 

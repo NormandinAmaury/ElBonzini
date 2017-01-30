@@ -21,7 +21,8 @@ var Style = StyleSheet.create({
    },
    navigationBar: {
      backgroundColor: mainColor,
-     alignItems: 'center'
+     alignItems: 'center',
+     height: 45,
    },
    navigationBarText: {
      color: 'white',
@@ -41,13 +42,12 @@ var Style = StyleSheet.create({
    },
    scrollViewSignup: {
      backgroundColor: '#FFFFFF',
-     flex: 1,
-     paddingTop: 20,
+     paddingTop: 45,
    },
    scrollViewLogin: {
      flex: 0.5,
      backgroundColor: '#FFFFFF',
-     paddingTop: 30,
+     paddingTop: 45,
    },
    profileContainer: {
      flex: 1,

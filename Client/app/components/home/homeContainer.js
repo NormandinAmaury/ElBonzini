@@ -10,7 +10,7 @@ import {
   Navigator,
 } from 'react-native';
 
-import BabyListContainer from '../babyFootList/containers/babyFootListContainer';
+import FoosballListContainer from '../foosballList/containers/foosballListContainer';
 import ProfileContainer from '../profile/containers/profileContainer';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Tabs, Tab} from 'react-native-elements'
@@ -37,7 +37,7 @@ export default class TabBarContainer extends Component {
                                           style={{top: 5, backgroundColor: 'transparent'}}/>}
           onPress={() => this.updateSelectedTab("home")}
         >
-          <BabyListContainer navigator={this.props.navigator}/>
+          <FoosballListContainer navigator={this.props.navigator}/>
         </Tab>
         <Tab
           selected={this.state.selectedTab === 'profile'}

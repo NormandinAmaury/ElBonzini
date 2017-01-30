@@ -36,7 +36,7 @@ const ProfileScene = function (props) {
        <Text>{props.user.firstName} {props.user.lastName} {'\n\n'}</Text>
        <Text>Username : {props.user.username}</Text>
        <Text>French Department : {props.user.frenchDepartment}</Text>
-       <Text>{'\n\n\n\n\n\n'}</Text>
+       <Text>{'\n\n\n\n\n'}</Text>
        <Button
         small
         raised
@@ -46,7 +46,7 @@ const ProfileScene = function (props) {
         backgroundColor='#CF2720'
         borderRadius={10}
         buttonStyle={{width: 250}}
-        onPress={props.deleteUser}
+        onPress={props.alertDelete}
        />
      </View>
    </ScrollView>

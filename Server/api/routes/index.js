@@ -7,7 +7,7 @@
 
 const router = require('express').Router();
 const authRoutes = require('./client/authentification')(router);
-const babyFootRoutes = require('./client/babyFoot')(router);
+const foosballRoutes = require('./client/foosball')(router);
 const userRoutes = require('./client/user')(router);
 const config = require('../../config/config');
 const jwt = require('jwt-simple');
@@ -62,6 +62,6 @@ module.exports = (function () {
 
   router.use('/', authRoutes);
   router.use('/user', userRoutes);
-  router.use('/babyfoot', babyFootRoutes);
+  router.use('/foosball', foosballRoutes);
   return router;
 })();
