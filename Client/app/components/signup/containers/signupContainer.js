@@ -13,9 +13,6 @@ import {
 import SignUpScene from '../scenes/signupScene';
 import HomeContainer from '../../home/homeContainer';
 
-import Api from '../../../helpers/apiHelper';
-import LocalStorage  from '../../../helpers/localStorageHelper';
-import Constant from '../../../../src/assets/constants/constant';
 import {connect} from 'react-redux';
 import * as userActions from '../../../actions/userActions';
 
@@ -31,31 +28,35 @@ class SignUpSceneContainer extends Component {
       username: '',
       frenchDepartment: '',
       errorMessage: '',
+      errorMessageDepartment: '',
       error: true,
+      errorDepartment: false,
     };
   }
 
   render() {
     return (
-      <SignUpScene
-        updateFirstName={this.updateFirstName.bind(this)}
-        updateLastName={this.updateLastName.bind(this)}
-        updateEmail={this.updateEmail.bind(this)}
-        updatePassword={this.updatePassword.bind(this)}
-        updateUsername={this.updateUsername.bind(this)}
-        updateFrenchDepartment={this.updateFrenchDepartment.bind(this)}
-        checkPassword={this.checkPassword.bind(this)}
-        register={this.register.bind(this)}
-        emailAddress={this.state.emailAddress}
-        password={this.state.password}
-        confirmPassword={this.state.confirmPassword}
-        firstName={this.state.firstName}
-        lastName={this.state.lastName}
-        username={this.state.username}
-        frenchDepartment={this.state.frenchDepartment}
-        error={this.state.error}
-        errorMessage={this.state.errorMessage}
-      />
+     <SignUpScene
+      updateFirstName={this.updateFirstName.bind(this)}
+      updateLastName={this.updateLastName.bind(this)}
+      updateEmail={this.updateEmail.bind(this)}
+      updatePassword={this.updatePassword.bind(this)}
+      updateUsername={this.updateUsername.bind(this)}
+      updateFrenchDepartment={this.updateFrenchDepartment.bind(this)}
+      checkPassword={this.checkPassword.bind(this)}
+      register={this.register.bind(this)}
+      emailAddress={this.state.emailAddress}
+      password={this.state.password}
+      confirmPassword={this.state.confirmPassword}
+      firstName={this.state.firstName}
+      lastName={this.state.lastName}
+      username={this.state.username}
+      frenchDepartment={this.state.frenchDepartment}
+      error={this.state.error}
+      errorMessage={this.state.errorMessage}
+      errorDepartment={this.state.errorDepartment}
+      errorMessageDepartment={this.state.errorMessageDepartment}
+     />
     );
   }
 
@@ -102,11 +103,13 @@ class SignUpSceneContainer extends Component {
   updateFrenchDepartment(frenchDepartment) {
     this.setState({frenchDepartment: frenchDepartment});
     if (frenchDepartment.length > 2 && frenchDepartment !== '') {
-      if (this.checkInput()) {
-        this.setState({error: false});
+      if (this.checkInput() && Number.isInteger(frenchDepartment)) {
+        this.setState({error: false, errorDepartment: false});
       }
+    } else if (isNaN(frenchDepartment)) {
+      this.setState({errorDepartment: true})
     } else {
-      this.setState({error: true})
+      this.setState({error: true, errorDepartment: false})
     }
   }
 
@@ -148,7 +151,8 @@ class SignUpSceneContainer extends Component {
 
 
   register() {
-    if (!this.state.error) {
+    if (!this.state.error && !this.state.errorDepartment) {
+      console.log("1");
       const user = {
         firstName: this.state.firstName,
         lastName: this.state.lastName,
@@ -158,8 +162,8 @@ class SignUpSceneContainer extends Component {
         password: this.state.password,
       };
       this.props.createUser(user)
-        .then(() => {
-          this.props.login(user)
+       .then(() => {
+         this.props.login(user)
           .then(() => {
             this.props.navigator.push({
               title: 'Home',
@@ -168,25 +172,33 @@ class SignUpSceneContainer extends Component {
               display: false
             });
           })
-            .catch(err => {
-              this.setState({
-                error: true,
-                errorMessage: err
-              });
+          .catch(err => {
+            this.setState({
+              error: true,
+              errorMessage: err
             });
-        })
-        .catch(err => {
-          this.setState({
-            error: true,
-            errorMessage: err
           });
-        });
+       })
+       .catch(err => {
+         this.setState({
+           error: true,
+           errorMessage: err
+         });
+       });
+    } else if (this.state.errorDepartment) {
+      console.log("2");
+      this.setState({
+        errorDepartment: true,
+        errorMessageDepartment: 'Please to enter a valid french department'
+      })
     } else {
+      console.log("3");
       this.setState({
         error: true,
-        errorMessage: 'Veuillez remplir correctement les champs'
+        errorMessage: 'Please to fill in properly the fields'
       });
     }
+
   };
 }
 
@@ -204,4 +216,4 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  SignUpSceneContainer);
+ SignUpSceneContainer);

@@ -52,18 +52,24 @@ const SignUpScene = function(props) {
                    secureTextEntry={true}
                    value={props.confirmPassword}
         />
-        <Text></Text>
+        <Text>{'\n'}</Text>
+        <View style={Style.viewCenter}>
         <Button
           small
-          icon={{name: 'check', type: 'evilicon', color:'white'}}
+          icon={{name: 'md-checkmark', type: 'ionicon', color: 'white', size: 20}}
           title='CONFIRM'
           color='white'
           backgroundColor='#007F83'
           borderRadius={10}
-          buttonStyle={{width:250, justifyContent:'center'}}
+          buttonStyle={{width:250}}
           onPress={props.register}
         />
-        <ErrorMessage errorMessage={props.errorMessage} error={props.error} />
+        <ErrorMessage errorMessage={props.errorMessage}
+                      error={props.error}
+                      errorDepartment={props.errorDepartment}
+                      errorMessageDepartment={props.errorMessageDepartment}
+        />
+        </View>
       </ScrollView>
   );
 };

@@ -18,33 +18,44 @@ import {
 
 import {FormLabel, FormInput, Button} from 'react-native-elements';
 import ErrorMessage from '../../componentsHelper/errorMessage';
+import Style from '../../../../src/assets/styles/styles';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const AddBabyFootScene = function (props) {
   return (
-    <ScrollView>
-      <TouchableHighlight
-        onPress={props.onCloseModal}
-      >
-        <Text style={{marginTop: 50, fontSize: 15}}>Close</Text>
-      </TouchableHighlight>
-      <Text>Create a new baby foot</Text>
-      <FormLabel labelStyle={{color: '#007F83'}}>Babyfoot's Name</FormLabel>
-      <FormInput onChangeText={props.updateName}
-                 value={props.name}
-      />
-      <Text></Text>
-      <Button
+   <ScrollView>
+     <TouchableHighlight
+      onPress={props.onCloseModal}
+      style={Style.logoutAndCloseButton}
+     >
+       <Icon name="ios-close" size={35}
+             color='black'
+             style={Style.iconLogoutOrClose}/>
+     </TouchableHighlight>
+     <View style={Style.viewCenter}>
+       <Text style={Style.titleModal}>CREATE A NEW FOOSBALL</Text>
+       <Text>{'\n\n'}</Text>
+       <FormLabel labelStyle={{color: '#007F83'}}>Foosball's Name</FormLabel>
+     </View>
+     <FormInput onChangeText={props.updateName}
+                value={props.name}
+     />
+     <View style={Style.viewCenter}>
+       <Text>{'\n\n'}</Text>
+       <Button
         small
-        icon={{name: 'check', type: 'evilicon', color: 'white'}}
+        raised
+        icon={{name: 'md-checkmark', type: 'ionicon', color: 'white', size: 20}}
         title='CREATE'
         color='white'
         backgroundColor='#007F83'
         borderRadius={10}
         buttonStyle={{width: 250}}
         onPress={props.addBabyFoot}
-      />
-      <ErrorMessage errorMessage={props.errorMessage} error={props.error}/>
-    </ScrollView>
+       />
+       <ErrorMessage errorMessage={props.errorMessage} error={props.error}/>
+     </View>
+   </ScrollView>
 
   );
 };

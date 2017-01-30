@@ -9,18 +9,10 @@ export default (state = [], action) => {
       return [
        ...state,...action.babyFoot
       ];
-    // case 'CREATE_BABYFOOT_FAILED':
-    //   return Object.assign({}, state, {
-    //     error: action.error
-    //   });
     case 'GET_ALL_BABYFOOT_SUCCESSFULLY':
       return [
        ...action.babyFoot
       ];
-    // case 'GET_ALL_BABYFOOT_FAILED' :
-    //   return Object.assign({}, state, {
-    //     error: action.error
-    //   });
     case 'DELETE_BABYFOOT_SUCCESSFULLY':
       return [
        ...state.slice(0,action.index),

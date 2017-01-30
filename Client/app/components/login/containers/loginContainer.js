@@ -11,9 +11,6 @@ import {
 } from 'react-native';
 
 import LoginScene from '../scenes/loginScene';
-import Api from '../../../helpers/apiHelper';
-import LocalStorage from '../../../helpers/localStorageHelper';
-import Constant from '../../../../src/assets/constants/constant';
 import HomeContainer from '../../home/homeContainer';
 import { connect } from 'react-redux';
 import * as userActions from '../../../actions/userActions';

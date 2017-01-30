@@ -20,21 +20,21 @@ import {Card, Grid, Col} from 'react-native-elements'
 import AddBabyFootContainer from '../containers/addBabyFootContainer';
 import EditBabyFootContainer from '../containers/editBabyFootContainer';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Style from '../../../../src/assets/styles/styles';
 
 const BabyFootListScene = function (props) {
   return (
-   <ScrollView>
-     <View>
-       <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'flex-end', paddingTop: 20, paddingRight: 15}}
-                         onPress={props.onOpenModal}>
+     <ScrollView>
+       <TouchableOpacity
+        style={Style.addButton}
+        onPress={props.onOpenModal}>
          <Icon name="ios-add-outline" size={35}
                color='black'
-               style={{
-                 justifyContent: 'flex-end',
-                 backgroundColor: 'transparent'
-               }}/>
+               style={Style.iconLogoutOrClose} />
        </TouchableOpacity>
-     </View>
+       <View style={Style.viewCenter}>
+       <Text style={Style.titleModal}>YOUR FOOSBALL</Text>
+       </View>
      <ScrollView>
        {
          props.babyFoot.map((bf, index) => {
@@ -46,35 +46,37 @@ const BabyFootListScene = function (props) {
                       titleStyle={{textAlign: 'center'}}
                       image={{uri: bf.picture}}
                 >
-                  <View style={{ flexDirection: 'row',justifyContent: 'space-between'}}>
-
-                      <TouchableOpacity
-                       onPress={() => {props.onOpenEditModal(bf)}}
-                      >
-                        <Icon name={'md-create'}
-                              color='orange'
-                              size={30}
-                        />
-
-                      </TouchableOpacity>
-
-                      <TouchableOpacity
-                       onPress={() => {props.alertDelete(bf, index)}}
-                      >
-                          <Icon name={'md-trash'}
+                  <View style={Style.viewCard}>
+                    <TouchableOpacity
+                     onPress={() => {
+                       props.onOpenEditModal(bf)
+                     }}>
+                      <View style={{flexDirection: 'row',}}>
+                      <Text style={{color: 'orange'}}>EDIT  </Text>
+                      <Icon name={'md-create'}
+                            color='orange'
+                            size={15}/>
+                      </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                     onPress={() => {
+                       props.alertDelete(bf, index)
+                     }}
+                    >
+                      <View style={{flexDirection: 'row',}}>
+                        <Text style={{color: 'red'}}>DELETE  </Text>
+                        <Icon name={'md-trash'}
                               color='red'
-                              size={30}
-                        />
-
-                      </TouchableOpacity>
+                              size={15}/>
+                      </View>
+                    </TouchableOpacity>
                     <Modal
                      animationType={"slide"}
                      transparent={false}
                      visible={props.editModalVisible}
                      onRequestClose={() => {
                        console.log("Modal has been closed.")
-                     }}
-                    >
+                     }}>
                       <EditBabyFootContainer
                        onCloseEditModal={props.onCloseEditModal}
                        babyFootEdited={props.babyFootEdited}
@@ -95,15 +97,12 @@ const BabyFootListScene = function (props) {
       visible={props.modalVisible}
       onRequestClose={() => {
         console.log("Modal has been closed.")
-      }}
-     >
+      }}>
        <AddBabyFootContainer
         onCloseModal={props.onCloseModal}
        />
      </Modal>
-
-   </ScrollView>
-
+     </ScrollView>
   )
    ;
 };

@@ -31,9 +31,9 @@ export default class TabBarContainer extends Component {
           title='Home'
           titleStyle={{fontSize: 10, color: 'black', margin: 0, padding: 0}}
           selectedTitleStyle={{fontSize: 10, color: '#007F83', margin: 0, padding: 0}}
-          renderIcon={() => <Icon name="ios-contacts-outline" size={30} color='black'
+          renderIcon={() => <Icon name="ios-home-outline" size={30} color='black'
                                   style={{top: 5, backgroundColor: 'transparent'}}/>}
-          renderSelectedIcon={() => <Icon name="ios-contacts-outline" size={30} color='#007F83'
+          renderSelectedIcon={() => <Icon name="ios-home-outline" size={30} color='#007F83'
                                           style={{top: 5, backgroundColor: 'transparent'}}/>}
           onPress={() => this.updateSelectedTab("home")}
         >
@@ -44,9 +44,9 @@ export default class TabBarContainer extends Component {
           title='Profile'
           titleStyle={{fontSize: 10, color: 'black', margin: 0, padding: 0}}
           selectedTitleStyle={{fontSize: 10, color: '#007F83', margin: 0, padding: 0}}
-          renderIcon={() => <Icon name="ios-home-outline" size={30} color='black'
+          renderIcon={() => <Icon name="ios-person-outline" size={30} color='black'
                                   style={{top: 5, backgroundColor: 'transparent'}}/>}
-          renderSelectedIcon={() => <Icon name="ios-home-outline" size={30} color='#007F83'
+          renderSelectedIcon={() => <Icon name="ios-person-outline" size={30} color='#007F83'
                                           style={{top: 5, backgroundColor: 'transparent'}}/>}
           onPress={() => this.updateSelectedTab("profile")}
         >
