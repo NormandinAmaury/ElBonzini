@@ -24,25 +24,26 @@ import Style from '../../../../src/assets/styles/styles';
 
 const FoosballListScene = function (props) {
   return (
-     <ScrollView>
-       <TouchableOpacity
-        style={Style.addButton}
-        onPress={props.onOpenModal}>
-         <Icon name="ios-add-outline" size={35}
-               color='black'
-               style={Style.iconLogoutOrClose} />
-       </TouchableOpacity>
-       <View style={Style.viewCenter}>
+   <ScrollView>
+     <TouchableOpacity
+      style={Style.addButton}
+      onPress={props.onOpenModal}>
+       <Icon name="ios-add-outline" size={35}
+             color='black'
+             style={Style.iconLogoutOrClose}/>
+     </TouchableOpacity>
+     <View style={Style.viewCenter}>
        <Text style={Style.titleList}>YOUR FOOSBALL</Text>
-       </View>
+     </View>
      <ScrollView>
        {
          props.foosball.map((foosball, index) => {
+           const title = foosball.name + ' by ' + foosball.username + ' (' + foosball.frenchDepartment + ')';
            return (
             <TouchableHighlight key={index} onPress={(foosball) => console.log(foosball)}>
               <ScrollView>
                 <Card key={index}
-                      title={foosball.name}
+                      title={title}
                       titleStyle={{textAlign: 'center'}}
                       image={{uri: foosball.picture}}
                 >
@@ -51,11 +52,11 @@ const FoosballListScene = function (props) {
                      onPress={() => {
                        props.onOpenEditModal(foosball)
                      }}>
-                      <View style={{flexDirection: 'row',}}>
-                      <Text style={{color: 'orange'}}>EDIT  </Text>
-                      <Icon name={'md-create'}
-                            color='orange'
-                            size={15}/>
+                      <View style={{flexDirection: 'row'}}>
+                        <Text style={{color: 'orange'}}>EDIT </Text>
+                        <Icon name={'md-create'}
+                              color='orange'
+                              size={15}/>
                       </View>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -64,7 +65,7 @@ const FoosballListScene = function (props) {
                      }}
                     >
                       <View style={{flexDirection: 'row',}}>
-                        <Text style={{color: 'red'}}>DELETE  </Text>
+                        <Text style={{color: 'red'}}>DELETE </Text>
                         <Icon name={'md-trash'}
                               color='red'
                               size={15}/>
@@ -102,7 +103,7 @@ const FoosballListScene = function (props) {
         onCloseModal={props.onCloseModal}
        />
      </Modal>
-     </ScrollView>
+   </ScrollView>
   )
    ;
 };

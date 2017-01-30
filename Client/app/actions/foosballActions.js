@@ -79,6 +79,7 @@ export function createFoosball(foosball) {
      .then(response => response.json())
      .then(responseJson => {
        dispatch(createFoosballSuccessful(responseJson.data));
+       dispatch(getAllFoosball());
        return Promise.resolve();
      })
      .catch(err => {
@@ -102,6 +103,7 @@ export function getAllFoosball() {
     })
      .then(response => response.json())
      .then((responseJson) => {
+      console.log(responseJson.data);
        dispatch(getAllFoosballSuccessful(responseJson.data));
        return Promise.resolve();
      })
@@ -150,6 +152,7 @@ export function editFoosball(foosball,id) {
       console.log(response);
       if (response.data.ok === 1) {
         dispatch(editFoosballSuccessful(foosball));
+        dispatch(getAllFoosball());
       }
       return Promise.resolve();
      })

@@ -62,17 +62,57 @@ const methods = {
   deleteFoosball(id) {
     return Foosball.remove({_id: id}).exec();
   },
-  getAllFoosball(userId) {
-    return Foosball.find({userId}).exec();
-  },
-  getOneFoosball(id) {
-    return Foosball.findOne({_id: id}).exec();
+  getAllFoosball() {
+    return Foosball.find({}).exec();
   },
   findOneUserById(id) {
     return User.findOne({_id: id}).exec();
   },
   updateFoosball(id, foosball) {
     return Foosball.update({_id: id}, foosball).exec();
+  },
+  getAllFoosballAndUser(foosball) {
+    return new Promise((resolve, reject) => {
+      console.log("foosball:" + foosball);
+      let foosballArray = [];
+      async.each(foosball, (foosball, callback) => {
+        let tmpFoosball = {
+          _id: foosball._id,
+          userId: foosball.userId,
+          name: foosball.name,
+          picture: foosball.picture
+        };
+        console.log("tmp foosball : " + tmpFoosball);
+        if (typeof tmpFoosball.userId !== 'undefined' &&
+         tmpFoosball.userId !== null && tmpFoosball.userId !== '') {
+          methods.findOneUserById(tmpFoosball.userId)
+           .then(user => {
+             if (user) {
+               tmpFoosball.username = user.username;
+               tmpFoosball.frenchDepartment = user.frenchDepartment;
+               foosballArray.push(tmpFoosball);
+               callback();
+             } else {
+               tmpFoosball.username = '';
+               tmpFoosball.frenchDepartment = '';
+               foosballArray.push(tmpFoosball);
+               callback();
+             }
+           })
+           .catch(err => callback());
+        } else {
+          tmpFoosball.username = '';
+          foosballArray.push(tmpFoosball);
+          callback();
+        }
+      }, (err) => {
+        if (err) {
+          reject();
+        } else {
+          resolve(foosballArray);
+        }
+      });
+    })
   }
 };
 
@@ -91,12 +131,21 @@ module.exports = function () {
 
   router.get('/', passport.authenticate('jwt', {session: false}),
    (req, res) => {
-     const userId = req.header.userId;
-     methods.getAllFoosball(userId)
-      .then(response => res.json(
-       {success: true, msg: 'Get all foosball successful', data: response}))
-      .catch(err => res.json(
-       {success: false, msg: 'Error get all foosball', err}))
+    methods.getAllFoosball()
+     .then(foosball => {
+       if(foosball) {
+         methods.getAllFoosballAndUser(foosball)
+          .then(response => res.json(
+           {success: true, msg: 'Get all foosball successful', data: response}))
+          .catch(err => res.json(
+           {success: false, msg: 'Error get all foosball', err}))
+       } else {
+         res.json({success: false, msg: 'Foosball not found'});
+       }
+     })
+     .catch(err => {
+       res.json({success: false, err: err});
+     });
    });
 
   router.delete('/:id', passport.authenticate('jwt', {session: false}),

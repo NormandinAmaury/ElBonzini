@@ -64,6 +64,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     createFoosball: (foosball) => dispatch(foosballActions.createFoosball(foosball)),
+    getAllFoosball: () => dispatch(foosballActions.getAllFoosball()),
   }
 };
 

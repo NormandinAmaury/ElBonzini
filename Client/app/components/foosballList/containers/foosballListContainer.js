@@ -28,10 +28,10 @@ class HomeContainer extends Component {
 
   componentWillMount() {
     this.props.getUser();
+    this.props.getAllFoosball();
   }
 
   render() {
-    this.props.getAllFoosball();
     return (
      <FoosballListScene
       foosball={this.props.foosballObj}
@@ -97,7 +97,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getAllFoosball: () => dispatch(foosballActions.getAllFoosball()),
     deleteFoosball: (id, index) => dispatch(foosballActions.deleteFoosball(id, index)),
-    getUser: () => dispatch(userActions.getUser()),
+    getUser: () => dispatch(userActions.getUser())
   }
 };
 
